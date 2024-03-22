@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>dango</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+</head>
+
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+
+    <!-- Hero Slider Area -->
+    <section th:replace="~{common/fragments/heroSlider :: heroSlider}"></section>
+
+    <!-- Product Area -->
+    <section th:replace="~{common/fragments/product :: product}"></section>
+
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>
