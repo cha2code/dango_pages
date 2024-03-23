@@ -35,11 +35,11 @@ dependencies {
     implementation 'com.github.ulisesbocchio:jasypt-spring-boot-starter:3.0.5'
 
     // Spring Security
-    //implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
 
     // Thymeleaf 및 Spring Security용 DSL
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    //implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
     // ThymeLeaf Layout
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 
