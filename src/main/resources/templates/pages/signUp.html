@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>dango :: Sign up</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+    <!-- Login CSS -->
+    <link rel="stylesheet" type="text/css" href="/dist/css/utils.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/user.css">
+</head>
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+    <!-- Sign up Area -->
+    <div class="limiter">
+        <div class="container-user100">
+            <div class="wrap-user100">
+                <form action="/signup" method="post" class="user100-form flex-sb flex-w">
+                    <span class="user100-form-title p-b-51 m-t-100">
+                        회원가입
+                    </span>
+                    <!-- ID -->
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt1">
+                            <strong>아이디</strong>
+                        </p>
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" name="userId" placeholder="아이디 입력 (6~12자)">
+                            <span class="focus-input100"></span>
+                            <button type="submit" class="check-btn">중복확인</button>
+                        </div>
+                    </div>
+                    <!-- Password -->
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt1">
+                            <strong>비밀번호</strong>
+                        </p>
+                        <div class="wrap-input100">
+                            <input class="input100" type="password" name="password"
+                                   placeholder="비밀번호 입력(영문+숫자 조합 8자리 이상)">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                    <!-- Nickname -->
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt1">
+                            <strong>닉네임</strong>
+                        </p>
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" name="userId" placeholder="닉네임 입력">
+                            <span class="focus-input100"></span>
+                            <button type="submit" class="check-btn">중복확인</button>
+                        </div>
+                    </div>
+                    <!-- e-mail -->
+                    <div class="m-b-10 div-block">
+                        <p class="m-b-8 txt1">
+                            <strong>이메일</strong>
+                        </p>
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" name="email" placeholder="이메일 입력">
+                            <span class="focus-input100"></span>
+                        </div>
+                    </div>
+                    <!-- Authentication Area -->
+                    <div class="m-b-40 div-block">
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" name="mailCheck" placeholder="인증코드 입력">
+                            <span class="focus-input100"></span>
+                            <button type="submit" class="check-btn">인증요청</button>
+                        </div>
+                    </div>
+                    <!-- Sign up Button -->
+                    <div class="container-user100-form-btn m-t-17 m-b-100">
+                        <button type="submit" class="user100-form-btn">
+                            회원가입
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>

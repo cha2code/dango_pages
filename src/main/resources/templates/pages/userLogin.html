@@ -9,7 +9,7 @@
     <!-- Common Configuration -->
     <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
     <!-- Login CSS -->
-    <link rel="stylesheet" type="text/css" href="/dist/css/loginUtil.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/utils.css">
     <link rel="stylesheet" type="text/css" href="/dist/css/user.css">
 </head>
 <body>
@@ -17,19 +17,19 @@
     <header th:replace="~{common/fragments/header :: header}"></header>
     <!-- Login Area -->
     <div class="limiter">
-        <div class="container-login100">
-            <div class="wrap-login100">
-                <form action="/login" method="post" class="login100-form validate-form flex-sb flex-w">
-                    <span class="login100-form-title p-b-51">
-                        Login
+        <div class="container-user100">
+            <div class="wrap-user100">
+                <form action="/login" method="post" class="user100-form flex-sb flex-w">
+                    <span class="user100-form-title p-b-51">
+                        로그인
                     </span>
                     <!-- ID -->
-                    <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+                    <div class="wrap-input100 m-b-16">
                         <input class="input100" type="text" name="userId" placeholder="아이디">
                         <span class="focus-input100"></span>
                     </div>
                     <!-- Password -->
-                    <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+                    <div class="wrap-input100 m-b-16">
                         <input class="input100" type="password" name="password" placeholder="비밀번호">
                         <span class="focus-input100"></span>
                     </div>
@@ -43,13 +43,13 @@
                         </div>
                     </div>
                     <!-- Login Button -->
-                    <div class="container-login100-form-btn m-t-17">
-                        <button type="submit" class="login100-form-btn">
-                            Login
+                    <div class="container-user100-form-btn m-t-17">
+                        <button type="submit" class="user100-form-btn">
+                            로그인
                         </button>
                     </div>
                     <!-- 아이디/비밀번호/회원가입 -->
-                    <div class="login100-form-title p-b-51 mt-30 d-flex justify-content-center">
+                    <div class="user100-form-title p-b-51 mt-30 d-flex justify-content-center">
                         <a href="#" class="txt1 col-4">
                             아이디 찾기
                         </a>
