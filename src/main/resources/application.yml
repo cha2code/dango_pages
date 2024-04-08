@@ -7,12 +7,15 @@ spring:
   jpa:
     hibernate:
       ddl-auto: none
-    defer-datasource-initialization: true
-    database-platform: org.hibernate.dialect.MySQLDialect
-    show-sql: false
+      defer-datasource-initialization: true
+      database-platform: org.hibernate.dialect.MySQLDialect
+      show-sql: false
   thymeleaf:
     cache: false
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
     password: ${encrypt-password}
+logging:
+  level:
+    root: debug
