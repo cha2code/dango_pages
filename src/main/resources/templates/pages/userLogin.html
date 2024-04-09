@@ -19,48 +19,50 @@
     <div class="limiter">
         <div class="container-user100">
             <div class="wrap-user100">
-                <form th:action="@{/login}" method="post" class="user100-form flex-sb flex-w">
-                    <span class="user100-form-title p-b-51">
-                        로그인
-                    </span>
-                    <!-- ID -->
-                    <div class="wrap-input100 m-b-16">
-                        <input class="input100" type="text" name="username" id="username" placeholder="아이디">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <!-- Password -->
-                    <div class="wrap-input100 m-b-16">
-                        <input class="input100" type="password" name="password" id="password" placeholder="비밀번호">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="flex-sb-m w-full p-t-3 p-b-24">
-                        <!-- Remember me -->
-                        <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                            <label class="label-checkbox100" for="ckb1">
-                                로그인 상태 유지
-                            </label>
-                        </div>
-                    </div>
-                    <!-- Login Button -->
-                    <div class="container-user100-form-btn m-t-17">
-                        <button type="submit" class="btn user100-form-btn">
+                <form th:action="@{/login}" method="post">
+                    <div class="user100-form flex-sb flex-w">
+                        <span class="user100-form-title p-b-51">
                             로그인
-                        </button>
-                    </div>
-                    <!-- 아이디/비밀번호/회원가입 -->
-                    <div class="user100-form-title p-b-51 mt-30 d-flex justify-content-center">
-                        <a href="#" class="txt1 col-4">
-                            아이디 찾기
-                        </a>
-                        <p>|</p>
-                        <a href="#" class="txt1 col-4">
-                            비밀번호 찾기
-                        </a>
-                        <p>|</p>
-                        <a href="/signup" class="txt1 col-3">
-                            회원가입
-                        </a>
+                        </span>
+                        <!-- ID -->
+                        <div class="wrap-input100 m-b-16">
+                            <input class="input100" type="text" name="username" id="username" placeholder="아이디">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <!-- Password -->
+                        <div class="wrap-input100 m-b-16">
+                            <input class="input100" type="password" name="password" id="password" placeholder="비밀번호">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <div class="flex-sb-m w-full p-t-3 p-b-24">
+                            <!-- Remember me -->
+                            <div class="contact100-form-checkbox">
+                                <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                <label class="label-checkbox100" for="ckb1">
+                                    로그인 상태 유지
+                                </label>
+                            </div>
+                        </div>
+                        <!-- Login Button -->
+                        <div class="container-user100-form-btn m-t-17">
+                            <button type="submit" class="btn user100-form-btn">
+                                로그인
+                            </button>
+                        </div>
+                        <!-- 아이디/비밀번호/회원가입 -->
+                        <div class="user100-form-title p-b-51 mt-30 d-flex justify-content-center">
+                            <a href="#" class="txt1 col-4">
+                                아이디 찾기
+                            </a>
+                            <p>|</p>
+                            <a href="#" class="txt1 col-4">
+                                비밀번호 찾기
+                            </a>
+                            <p>|</p>
+                            <a th:href="@{/signup}" class="txt1 col-3">
+                                회원가입
+                            </a>
+                        </div>
                     </div>
                 </form>
             </div>

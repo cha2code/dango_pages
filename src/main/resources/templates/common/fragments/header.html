@@ -47,6 +47,7 @@
                         <!-- End Main Menu Search -->
                     </div>
                     <!-- Login/User Area -->
+                    <!-- 로그인 하지 않은 사용자 표시 메뉴 -->
                     <div sec:authorize="isAnonymous()"
                          class="col-lg-4 col-md-6 col-12 d-flex justify-content-end">
                             <a th:href="@{/signup}" class="btn" role="button">
@@ -56,14 +57,14 @@
                                 로그인
                             </a>
                     </div>
-                    <div sec:authorize="isAuthenticated()"
-                         class="col-lg-4 col-md-6 col-12 d-flex justify-content-end">
-                            <a href="#" class="btn" role="button">
-                                정보수정
-                            </a>
-                            <a th:href="@{/logout}" class="btn" role="button">
-                                로그아웃
-                            </a>
+                    <!-- 로그인 한 사용자 표시 메뉴 -->
+                    <div sec:authorize="isAuthenticated()" class="col-lg-4 col-md-6 col-12 d-flex justify-content-end">
+                        <a href="#" class="btn" role="button">
+                            정보수정
+                        </a>
+                        <form th:action="@{/logout}" method="post">
+                            <input type="submit" class="btn" value="로그아웃"></input>
+                        </form>
                     </div>
                     <!-- End Login/User Area -->
                 </div>
