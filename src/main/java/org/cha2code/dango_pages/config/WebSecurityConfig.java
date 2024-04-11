@@ -35,35 +35,37 @@ public class WebSecurityConfig {
 		                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
 		           .and()
 		           .authorizeRequests()
-		           // 정적 리소스 및 로그인 페이지는 인증 없이 허용
-		           .antMatchers("/common/**", "/dist/**", "/login", "/signup", "/").permitAll()
+		                // 정적 리소스 및 메인페이지는 인증 없이 허용
+		                .antMatchers("/common/**", "/dist/**", "/").permitAll()
+		                // 로그인, 회원가입 페이지는 익명 사용자만 접근 가능
+		                .antMatchers("/login", "/signup").anonymous()
 		           .and()
 		           // 로그인 설정
 		           .formLogin()
-		           // 로그인 페이지 URL
-		           .loginPage("/login")
-		           // 로그인 페이지에서 전달하는 ID 파라미터의 명칭
-		           .usernameParameter("username")
-		           // 로그인 페이지에서 전달하는 비밀번호 파라미터의 명칭
-		           .passwordParameter("password")
-		           // 로그인 성공시
-		           .successHandler((request, response, authentication) -> {
+		                // 로그인 페이지 URL
+		                .loginPage("/login")
+		                // 로그인 페이지에서 전달하는 ID 파라미터의 명칭
+		                .usernameParameter("username")
+		                // 로그인 페이지에서 전달하는 비밀번호 파라미터의 명칭
+		                 .passwordParameter("password")
+		                // 로그인 성공시
+		                 .successHandler((request, response, authentication) -> {
 			           request.getSession().setAttribute("userInfo", authentication.getPrincipal());
 			           log.info("authentication : " + authentication.getName());
 			           response.sendRedirect("/");
-		           })
-		           // 로그인 실패시
-		           .failureHandler((request, response, exception) -> {
-			           log.info("exception : " + exception.getMessage());
-			           response.sendRedirect("/login");
-		           })
+		                 })
+		                 // 로그인 실패시
+		                .failureHandler((request, response, exception) -> {
+			                log.info("exception : " + exception.getMessage());
+			                response.sendRedirect("/login");
+		                })
 		           .and()
 		           // 로그아웃 설정
 		           .logout()
-		           .logoutUrl("/logout")
-		           .invalidateHttpSession(true)
-		           .deleteCookies("JSESSIONID")
-		           .logoutSuccessUrl("/")
+		                .logoutUrl("/logout")
+		                .invalidateHttpSession(true)
+		                .deleteCookies("JSESSIONID")
+		                .logoutSuccessUrl("/")
 		           .and()
 		           .build();
 	}

@@ -12,10 +12,11 @@ spring:
       show-sql: false
   thymeleaf:
     cache: false
+server:
+  error:
+    whitelabel:
+      enabled: false
 jasypt:
   encryptor:
     bean: jasyptStringEncryptor
     password: ${encrypt-password}
-logging:
-  level:
-    root: debug

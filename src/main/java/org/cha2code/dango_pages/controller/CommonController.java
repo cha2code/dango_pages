@@ -2,7 +2,6 @@ package org.cha2code.dango_pages.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,7 +22,4 @@ public class CommonController {
 	public String signUp() {
 		return "pages/signUp";
 	}
-
-	@RequestMapping(value = "/logout", method = {RequestMethod.GET, RequestMethod.POST})
-	public void logout() {}
 }

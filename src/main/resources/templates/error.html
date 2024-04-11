@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>dango :: login</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+    <!-- Login CSS -->
+    <link rel="stylesheet" type="text/css" href="/dist/css/utils.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/user.css">
+</head>
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+    <!-- Error Area -->
+    <div class="container-user100">
+        <div class="wrap-user100">
+            <img src="/dist/images/error.png"/>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h3 class="dis-flex justify-content-center">잘못된 접근입니다.</h3>
+        </div>
+    </div>
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>
