@@ -11,7 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.security.web.csrf.HttpSessionCsrfTokenRepository;
 
 /**
  * Security 설정을 위한 Configuration
@@ -31,8 +31,8 @@ public class WebSecurityConfig {
 	@Bean
 	public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
 		return http.csrf()
-		                // 쿠키에 csrf 토큰 저장 (추후 수정 예정)
-		                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
+		                // 사용자 세션에 csrf 토큰 저장
+		                .csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 		           .and()
 		           .authorizeRequests()
 		                // 정적 리소스 및 메인페이지는 인증 없이 허용

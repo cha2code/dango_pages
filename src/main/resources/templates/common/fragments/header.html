@@ -3,6 +3,11 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
     <title></title>
 </head>
 <body>
@@ -63,7 +68,7 @@
                             정보수정
                         </a>
                         <form th:action="@{/logout}" method="post">
-                            <input type="submit" class="btn" value="로그아웃"></input>
+                            <input type="submit" class="btn" value="로그아웃">
                         </form>
                     </div>
                     <!-- End Login/User Area -->

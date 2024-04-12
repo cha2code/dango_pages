@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <title>dango :: Sign up</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -18,7 +19,7 @@
     <div class="limiter">
         <div class="container-user100">
             <div class="wrap-user100">
-                <form action="/signup" method="post" class="user100-form flex-sb flex-w">
+                <form th:action="@{/signup}" method="post" class="user100-form flex-sb flex-w">
                     <span class="user100-form-title p-b-51 m-t-100">
                         회원가입
                     </span>
