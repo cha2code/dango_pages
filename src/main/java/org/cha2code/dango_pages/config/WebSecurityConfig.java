@@ -67,6 +67,12 @@ public class WebSecurityConfig {
 		                .deleteCookies("JSESSIONID")
 		                .logoutSuccessUrl("/")
 		           .and()
+		           .rememberMe()
+		                .rememberMeParameter("remember-me")
+						.tokenValiditySeconds(604800) // 쿠키 만료 시간 (7일)
+						.alwaysRemember(false) // 사용자가 체크할 때만 쿠키 저장
+						.userDetailsService(userDetailsService) // 저장할 사용자 정보
+		           .and()
 		           .build();
 	}
 
