@@ -60,13 +60,6 @@ public class WebSecurityConfig {
 			                response.sendRedirect("/login");
 		                })
 		           .and()
-		           // rememberMe 로그인 한 사용자 정보 저장
-		           .rememberMe()
-		                .rememberMeParameter("remember-me")
-						.tokenValiditySeconds(604800) // 쿠키 만료 시간 (7일)
-						.alwaysRemember(false) // 사용자가 체크하지 않으면 저장하지 않음
-						.userDetailsService(userDetailsService) // 쿠키에 저장할 사용자 정보
-		           .and()
 		           // 로그아웃 설정
 		           .logout()
 		                .logoutUrl("/logout")
