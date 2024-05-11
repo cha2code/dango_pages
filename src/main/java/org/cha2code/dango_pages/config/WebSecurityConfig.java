@@ -35,10 +35,9 @@ public class WebSecurityConfig {
 		                .csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 		           .and()
 		           .authorizeRequests()
-		                // 정적 리소스 및 메인페이지는 인증 없이 허용
-		                .antMatchers("/common/**", "/dist/**", "/").permitAll()
 		                // 로그인, 회원가입 페이지는 익명 사용자만 접근 가능
 		                .antMatchers("/login", "/signup").anonymous()
+						.anyRequest().permitAll()
 		           .and()
 		           // 로그인 설정
 		           .formLogin()

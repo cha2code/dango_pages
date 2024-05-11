@@ -12,5 +12,5 @@ import java.util.Optional;
  */
 public interface UserRoleRepository extends JpaRepository<UserRole, UserRoleId> {
 	// 사용자가 가진 권한들을 찾는 메소드
-	List<UserRole> findAllByUsernameIs(String username);
+	List<UserRole> findAllByRoleCodeIs(String username);
 }

@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
  * DTO for {@link org.cha2code.dango_pages.entity.UserMaster}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record UserMasterDto(String username,
+public record UserMasterDto(String userId,
                             String userPassword,
                             String nickname,
                             String email,
@@ -22,7 +22,7 @@ public record UserMasterDto(String username,
 		Serializable {
 	public UserMaster toEntity() {
 		return UserMaster.builder()
-		                 .username(username)
+		                 .userId(userId)
 		                 .userPassword(userPassword)
 		                 .nickname(nickname)
 		                 .email(email)

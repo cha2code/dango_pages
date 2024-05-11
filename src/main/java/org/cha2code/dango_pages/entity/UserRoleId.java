@@ -20,16 +20,10 @@ public class UserRoleId implements Serializable {
 	private static final long serialVersionUID = 6636787881606024025L;
 
 	@Column(name = "user_id", nullable = false, length = 40)
-	private String username;
+	private String userId;
 
 	@Column(name = "role_code", nullable = false, length = 40)
 	private String roleCode;
-
-	@Column(name = "user_id", nullable = false, length = 40)
-	public String getUsername() {return username;}
-
-	@Column(name = "role_code", nullable = false, length = 40)
-	public String getRoleCode() {return roleCode;}
 
 	@Override
 	public boolean equals(Object o) {
@@ -41,12 +35,12 @@ public class UserRoleId implements Serializable {
 		}
 		UserRoleId entity = (UserRoleId) o;
 		return Objects.equals(this.roleCode, entity.roleCode) &&
-				Objects.equals(this.username, entity.username);
+				Objects.equals(this.userId, entity.userId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(roleCode, username);
+		return Objects.hash(userId, roleCode);
 	}
 
 }

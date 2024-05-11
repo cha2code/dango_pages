@@ -28,7 +28,7 @@ import java.time.LocalDateTime;
 public class UserMaster extends BaseAuditorEntity {
 	@Id
 	@Column(name = "user_id", nullable = false, length = 40)
-	private String username;
+	private String userId;
 
 	@Column(name = "user_password", nullable = false)
 	private String userPassword;
@@ -43,7 +43,7 @@ public class UserMaster extends BaseAuditorEntity {
 	@Column(name = "password_modified_at")
 	private LocalDateTime passwordModifiedAt;
 
-	/** 비밀번호 인코딩 method */
+	// 비밀번호 암호화
 	public UserMaster encodePassword(PasswordEncoder encoder) {
 		if (StringUtils.hasText(this.userPassword)) {
 			this.userPassword = encoder.encode(this.userPassword);
@@ -55,7 +55,7 @@ public class UserMaster extends BaseAuditorEntity {
 	// entity -> DTO 변환 메소드 (트랜잭션 처리 예외)
 	@Transient
 	public UserMasterDto toDTO() {
-		return new UserMasterDto(username,
+		return new UserMasterDto(userId,
 		                         userPassword,
 		                         nickname,
 		                         email,
@@ -64,5 +64,11 @@ public class UserMaster extends BaseAuditorEntity {
 		                         getCreateDate(),
 		                         getModifyUser(),
 		                         getModifyDate());
+	}
+
+	// 생성자와 생성일자 유무 체크
+	@Transient
+	public boolean isCreated() {
+		return StringUtils.hasText(getCreateUser()) && !ObjectUtils.isEmpty(getCreateDate());
 	}
 }
