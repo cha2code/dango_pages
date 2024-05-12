@@ -8,4 +8,5 @@ import lombok.Data;
 @Data
 public class UserExistCheckDTO {
 	private String userId;
+	private String nickname;
 }

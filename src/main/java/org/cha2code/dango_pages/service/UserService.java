@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Optional;
 
 /**
- * 사용자 정보를 CRUD처리 하기 위한 service class
+ * 사용자 정보를 CRUD 하기 위한 service class
  */
 @Slf4j
 @Service
@@ -38,5 +38,14 @@ public class UserService {
 
 		return userMaster.map(UserMaster::toDTO)
 		                 .orElse(null);
+	}
+
+	/**
+	 * 특정 닉네임에 해당하는 사용자의 수를 반환한다.
+	 * @param nickname 사용자 닉네임
+	 * @return 해당 닉네임을 가진 사용자의 수
+	 */
+	public long countByNickname(String nickname) {
+		return userRepo.countByNickname(nickname);
 	}
 }
