@@ -2,7 +2,7 @@ package org.cha2code.dango_pages.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.cha2code.dango_pages.dto.UserMasterDto;
+import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.entity.UserMaster;
 import org.cha2code.dango_pages.repository.UserMasterRepository;
 import org.springframework.stereotype.Service;
@@ -32,7 +32,7 @@ public class UserService {
 	 * @param username 사용자 ID
 	 * @return 사용자 정보 DTO, UserMasterDTO
 	 */
-	public UserMasterDto getUserInfo(String username) {
+	public UserMasterDTO getUserInfo(String username) {
 		// 입력 받은 사용자 ID 검색
 		Optional<UserMaster> userMaster = userRepo.findByUsername(username);
 
@@ -47,5 +47,14 @@ public class UserService {
 	 */
 	public long countByNickname(String nickname) {
 		return userRepo.countByNickname(nickname);
+	}
+
+	/**
+	 * 특정 이메일에 해당하는 사용자의 수를 반환한다.
+	 * @param email 사용자 이메일
+	 * @return 해당 이메일을 가진 사용자의 수
+	 */
+	public long countByEmail(String email) {
+		return userRepo.countByEmail(email);
 	}
 }

@@ -27,6 +27,9 @@ public class WebSecurityConfig {
 
 	/**
 	 * 접근 권한, 로그인/로그아웃, 성공/실패 핸들러 설정을 위한 Bean 등록
+	 * @param http HttpSecurity
+	 * @return
+	 * @throws Exception
 	 */
 	@Bean
 	public SecurityFilterChain webSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -49,9 +52,9 @@ public class WebSecurityConfig {
 		                 .passwordParameter("password")
 		                // 로그인 성공시
 		                 .successHandler((request, response, authentication) -> {
-			           request.getSession().setAttribute("userInfo", authentication.getPrincipal());
-			           log.info("authentication : " + authentication.getName());
-			           response.sendRedirect("/");
+				           request.getSession().setAttribute("userInfo", authentication.getPrincipal());
+				           log.info("authentication : " + authentication.getName());
+				           response.sendRedirect("/");
 		                 })
 		                 // 로그인 실패시
 		                .failureHandler((request, response, exception) -> {

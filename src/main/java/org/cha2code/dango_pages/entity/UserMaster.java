@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.cha2code.dango_pages.dto.UserMasterDto;
+import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -54,8 +54,8 @@ public class UserMaster extends BaseAuditorEntity {
 
 	// entity -> DTO 변환 메소드 (트랜잭션 처리 예외)
 	@Transient
-	public UserMasterDto toDTO() {
-		return new UserMasterDto(userId,
+	public UserMasterDTO toDTO() {
+		return new UserMasterDTO(userId,
 		                         userPassword,
 		                         nickname,
 		                         email,

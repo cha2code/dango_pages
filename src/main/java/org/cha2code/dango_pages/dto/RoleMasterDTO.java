@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * DTO for {@link org.cha2code.dango_pages.entity.RoleMaster}
  */
 @JsonIgnoreProperties(ignoreUnknown = true)
-public record RoleMasterDto(String roleCode,
+public record RoleMasterDTO(String roleCode,
                             String roleName,
                             String memo,
                             String createUser,
@@ -27,7 +27,7 @@ public record RoleMasterDto(String roleCode,
 		                 .build();
 	}
 
-	public RoleMasterDto(String roleCode, String roleName, String memo) {
+	public RoleMasterDTO(String roleCode, String roleName, String memo) {
 		this(roleCode, roleName, memo, null, null, null, null);
 	}
 }

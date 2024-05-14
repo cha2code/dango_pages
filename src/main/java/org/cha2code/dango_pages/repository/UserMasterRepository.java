@@ -19,6 +19,11 @@ public interface UserMasterRepository extends JpaRepository<UserMaster, String> 
 	@Query(nativeQuery = true, value = "SELECT * FROM user_master WHERE nickname = :nickname")
 	Optional<UserMaster> findByNickname(@Param("nickname") String nickname);
 
+	// 이메일 검색을 위한 메소드
+	@Query(nativeQuery = true, value = "SELECT * FROM user_master WHERE email = :email")
+	Optional<UserMaster> findByEmail(@Param("email") String email);
+
 	long countByUserId(String userId);
 	long countByNickname(String nickname);
+	long countByEmail(String email);
 }
