@@ -10,8 +10,16 @@ $("document").ready(() => {
         });
     });
 
+    /* DOM Selector 호출 결과를 저장하는 변수 */
+    const userId = $("#userId");
+    const userPw = $("#password");
+    const userNick = $("#nickname");
+    const checkBtn = $("#checkBtn");
+    const mailCheck = $("#mailCheck");
+    const joinBtn = $("#joinBtn");
+
     /* 아이디 중복 및 유효성 검사 */
-    $("#userId").blur(() => {
+    userId.blur(() => {
         const inputId = $("#userId").val(); // 입력 받은 아이디
         const message = $("#idCheckInputBox"); // 아이디 적합 유무 메세지
 
@@ -45,7 +53,7 @@ $("document").ready(() => {
     }
 
     /* 비밀번호 유효성 검사 */
-    $("#password").blur(() => {
+    userPw.blur(() => {
         const inputPw = $("#password").val(); // 입력 받은 아이디
         const message = $("#pwCheckInputBox"); // 비밀번호 적합 유무 메세지
 
@@ -68,7 +76,7 @@ $("document").ready(() => {
     }
 
     /* 닉네임 중복 및 유효성 검사 */
-    $("#nickname").blur(() => {
+    userNick.blur(() => {
         const inputNick = $("#nickname").val(); // 입력 받은 닉네임
         const message = $("#nickCheckInputBox"); // 닉네임 적합 유무 메세지
 
@@ -104,7 +112,7 @@ $("document").ready(() => {
     var checkCode = ""; // 생성된 인증 코드
 
     /* 이메일 유효성 검사 및 인증 */
-    $("#checkBtn").click(() => {
+    checkBtn.click(() => {
         const inputEmail = $("#email").val(); // 입력 받은 이메일
         const mailMessage = $("#mailCheckInputBox"); // 이메일 적합 유무 메세지
 
@@ -138,7 +146,7 @@ $("document").ready(() => {
     });
 
     /* 인증 코드 비교 */
-    $("#mailCheck").blur(() => {
+    mailCheck.blur(() => {
         const inputCode = $("#mailCheck").val(); // 입력 받은 인증 코드
         const codeMessage = $("#codeCheckInputBox"); // 인증 코드 일치 유무 메세지
 
