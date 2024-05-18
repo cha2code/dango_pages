@@ -16,7 +16,7 @@
 
 
 ## 개요
-본 프로젝트는 `Dango`라는 임의의 서비스에서 사용자 페이지를 제공하기 위해 개발한 프로젝트입니다.
+본 프로젝트는 `Dango`라는 임의의 서비스에서 사용자 페이지를 제공하기 위해 개발한 프로젝트입니다.  
 [프로젝트 진행 과정을 기록하는 페이지](https://github.com/cha2code/daily_study/tree/main/record/dango)  
 
 
