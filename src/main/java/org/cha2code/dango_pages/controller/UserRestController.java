@@ -4,12 +4,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cha2code.dango_pages.dto.MailCheckDTO;
 import org.cha2code.dango_pages.dto.UserExistCheckDTO;
+import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.service.MailService;
 import org.cha2code.dango_pages.service.UserService;
+import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * 입력받은 사용자 정보를 처리하기 위한 RestController
@@ -98,5 +102,23 @@ public class UserRestController {
 		}
 
 		return "false";
+	}
+
+	/**
+	 *
+	 * @param requestData 사용자 등록 요청 데이터
+	 * @return true/false
+	 */
+	@PostMapping("/createUser")
+	public boolean createUser(@RequestBody UserMasterDTO requestData) {
+		boolean result = false;
+
+		log.info(requestData.toString());
+
+		if (requestData != null) {
+			List<UserMasterDTO> dataList = Collections.singletonList(requestData);
+			result = userService.createData(dataList);
+		}
+		return result;
 	}
 }

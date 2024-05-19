@@ -18,6 +18,12 @@ $("document").ready(() => {
     const mailCheck = $("#mailCheck");
     const joinBtn = $("#joinBtn");
 
+    /* 항목별 유효성 체크를 위한 변수 */
+    let passId = false;
+    let passPw = false;
+    let passNick = false;
+    let passMail = false;
+
     /* 아이디 중복 및 유효성 검사 */
     userId.blur(() => {
         const inputId = $("#userId").val(); // 입력 받은 아이디
@@ -26,6 +32,7 @@ $("document").ready(() => {
         // 아이디 유효성 검사 결과가 false 일 때
         if(idRegex(inputId) === false) {
             message.html("아이디는 6~20자의 영문 소문자, 숫자만 가능합니다.");
+            passId = false;
         }
 
         else {
@@ -38,7 +45,15 @@ $("document").ready(() => {
                 }),
                 contentType : "application/json",
                 success: function (data){
-                    message.html(data ? "사용 가능한 아이디입니다." : "중복된 아이디가 있습니다.");
+                    if(data) {
+                        message.html("사용 가능한 아이디입니다.");
+                        passId = true;
+                    }
+
+                    else {
+                        message.html("중복된 아이디가 있습니다.");
+                        passId = false;
+                    }
                 }
             });
         }
@@ -57,13 +72,15 @@ $("document").ready(() => {
         const inputPw = $("#password").val(); // 입력 받은 아이디
         const message = $("#pwCheckInputBox"); // 비밀번호 적합 유무 메세지
 
-        // 비밀번호 유효성 검사 결과가 false 일 때
+        // 비밀번호 유효성 검사 결과가 true 일 때
         if(pwRegex(inputPw)) {
             message.html("사용 가능한 비밀번호입니다.");
+            passPw = true;
         }
 
         else {
             message.html("비밀번호는 8자리 이상의 영문+숫자+특수문자(@$!%*#?&)로 입력하세요.");
+            passPw = false;
         }
     });
 
@@ -83,6 +100,7 @@ $("document").ready(() => {
         // 닉네임 유효성 검사 결과가 false 일 때
         if(nickRegex(inputNick) === false) {
             message.html("닉네임은 2~6자의 영문, 숫자, 한글만 가능합니다.");
+            passNick = false;
         }
 
         else {
@@ -95,7 +113,15 @@ $("document").ready(() => {
                 }),
                 contentType : "application/json",
                 success: function (data){
-                    message.html(data ? "사용 가능한 닉네임입니다." : "중복된 닉네임이 있습니다.");
+                    if(data) {
+                        message.html("사용 가능한 닉네임입니다.");
+                        passNick = true;
+                    }
+
+                    else {
+                        message.html("중복된 닉네임이 있습니다.");
+                        passNick = false;
+                    }
                 }
             });
         }
@@ -119,6 +145,7 @@ $("document").ready(() => {
         // 이메일 유효성 검사 결과가 false 일 때
         if(mailRegex(inputEmail) === false) {
             mailMessage.html("이메일 형식으로 입력하세요.");
+            passMail = false;
         }
 
         else {
@@ -133,12 +160,12 @@ $("document").ready(() => {
                 success: function (data){
                     if(data === "false") {
                         mailMessage.html("중복된 이메일이 있습니다.");
+                        passMail = false;
                     }
 
                     else {
                         mailMessage.html("인증 코드가 전송되었습니다.");
                         checkCode = data;
-                        console.log(checkCode);
                     }
                 }
             });
@@ -151,7 +178,15 @@ $("document").ready(() => {
         const codeMessage = $("#codeCheckInputBox"); // 인증 코드 일치 유무 메세지
 
         // 발송된 코드와 입력 받은 코드 비교
-        codeMessage.html(checkCode === inputCode ? "인증 번호가 일치합니다." : "인증 번호를 확인해주세요.");
+        if(checkCode === inputCode) {
+            codeMessage.html("인증 번호가 일치합니다.");
+            passMail = true;
+        }
+
+        else {
+            codeMessage.html("인증 번호를 확인해주세요.");
+            passMail = false;
+        }
     });
 
     // 이메일 형식 검사
@@ -161,4 +196,39 @@ $("document").ready(() => {
         // 정규표현식 조건에 적합하면 true, 아니면 false 반환
         return form.test(inputEmail);
     }
+
+    /* form 제출 이벤트 */
+    $("#registrationForm").submit(function(event) {
+        // form 제출 시 재실행을 막아 입력 내용이 사라지지 않음
+        event.preventDefault();
+
+        // 모든 필드의 유효성 검사 통과 시
+        if(passId && passPw && passNick && passMail) {
+            $.ajax({
+                type: "post",
+                url: "/createUser",
+                data: JSON.stringify({
+                    userId: $("#userId").val(),
+                    userPassword: $("#password").val(),
+                    nickname: $("#nickname").val(),
+                    email: $("#email").val()
+                }),
+                contentType: "application/json",
+                success: function(response) {
+                    if(response) {
+                        alert("회원 가입이 완료되었습니다.");
+                        // form 제출 후 로그인 페이지로 redirect
+                        window.location.href = "/login";
+                    }
+
+                    else {
+                        alert("가입에 실패했습니다. 다시 시도해 주세요.");
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.log("Error registering user:", xhr.responseText);
+                }
+            });
+        }
+    });
 });

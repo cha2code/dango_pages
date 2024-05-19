@@ -38,7 +38,7 @@ public class SecurityUserDetailService implements UserDetailsService {
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// repository를 통해 DB에서 해당 ID와 일치하는 사용자 검색
-		UserMaster userMaster = userRepo.findByUsername(username)
+		UserMaster userMaster = userRepo.findByUserId(username)
 		                                  .orElseThrow(() ->
 											  new UsernameNotFoundException("Cannot found user"));
 
@@ -55,7 +55,6 @@ public class SecurityUserDetailService implements UserDetailsService {
 			        .forEach(codeStr -> authorities.add(new SimpleGrantedAuthority(codeStr)));
 		}
 
-		log.info("User found: {}", username);
 		return new User(userMaster.getUserId(), userMaster.getUserPassword(), authorities);
 	}
 }
