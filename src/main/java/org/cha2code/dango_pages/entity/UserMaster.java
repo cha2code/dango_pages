@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
-import org.hibernate.annotations.GenericGenerator;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
@@ -28,8 +27,6 @@ import java.time.LocalDateTime;
 @Table(name = "user_master")
 public class UserMaster extends BaseAuditorEntity {
 	@Id
-	//@GeneratedValue(generator = "uuid")
-	//@GenericGenerator(name = "uuid", strategy = "uuid2")
 	@Column(name = "user_id", nullable = false, length = 40)
 	private String userId;
 

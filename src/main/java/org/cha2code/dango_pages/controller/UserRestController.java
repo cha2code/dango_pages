@@ -7,7 +7,6 @@ import org.cha2code.dango_pages.dto.UserExistCheckDTO;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.service.MailService;
 import org.cha2code.dango_pages.service.UserService;
-import org.springframework.util.CollectionUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
@@ -105,7 +104,7 @@ public class UserRestController {
 	}
 
 	/**
-	 *
+	 * 사용자 생성 결과를 반환한다.
 	 * @param requestData 사용자 등록 요청 데이터
 	 * @return true/false
 	 */
@@ -113,12 +112,14 @@ public class UserRestController {
 	public boolean createUser(@RequestBody UserMasterDTO requestData) {
 		boolean result = false;
 
-		log.info(requestData.toString());
-
+		// form에서 전달 받은 데이터가 있을 경우
 		if (requestData != null) {
+			// UserMasterDTO 값을 List<UserMasterDTO> 값으로 저장
 			List<UserMasterDTO> dataList = Collections.singletonList(requestData);
+			// 사용자 생성 결과 저장
 			result = userService.createData(dataList);
 		}
+
 		return result;
 	}
 }

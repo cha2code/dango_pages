@@ -40,6 +40,7 @@ public class UserService {
 		// 입력 받은 사용자 ID 검색
 		Optional<UserMaster> userMaster = userRepo.findByUserId(username);
 
+		// UserMaster로 받은 객체를 DTO로 변환 후 결과 반환
 		return userMaster.map(UserMaster::toDTO)
 		                 .orElse(null);
 	}
@@ -69,13 +70,16 @@ public class UserService {
 	 */
 	@Transactional
 	public boolean createData(List<UserMasterDTO> dataList) {
+		// 사용자 정보를 entity로 변환 후 비밀번호 암호화하여 List에 저장
 		List<UserMaster> list = dataList.stream()
 										.map(UserMasterDTO::toEntity)
 										.map(entity -> entity.encodePassword(passwordEncoder))
 										.toList();
 
+		// entity로 변환한 사용자 정보를 DB에 저장
 		List<UserMaster> resultList = userRepo.saveAll(list);
 
+		// 생성자와 생성일자 유무 체크 후 결과 반환
 		return resultList.stream().allMatch(UserMaster::isCreated);
 	}
 }

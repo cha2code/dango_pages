@@ -1,17 +1,12 @@
 package org.cha2code.dango_pages.controller;
 
-import lombok.RequiredArgsConstructor;
-import org.cha2code.dango_pages.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@RequiredArgsConstructor
 @Controller
 public class CommonController {
-
-	private final UserService userService;
 
 	@GetMapping("/")
 	public String index() {
@@ -23,7 +18,7 @@ public class CommonController {
 		return "pages/userLogin";
 	}
 
-	@RequestMapping(value = "/signup", method = {RequestMethod.GET, RequestMethod.POST})
+	@GetMapping("/signup")
 	public String signUp() {
 		return "pages/signUp";
 	}

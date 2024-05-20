@@ -14,7 +14,7 @@ import java.util.Optional;
  * Bean으로 등록하는 Class
  */
 @Configuration
-@SuppressWarnings("NullableProblems")
+@SuppressWarnings("NullableProblems") // 컴파일 시 Null 경고 무시
 public class AuditorAwareConfig implements AuditorAware<String> {
 	/**
 	 * 생성자, 수정자로 들어갈 사용자 정보를 불러와 반환한다.
@@ -29,6 +29,7 @@ public class AuditorAwareConfig implements AuditorAware<String> {
 			return Optional.empty();
 		}
 
+		// Spring Security에 저장 된 정보 가져오기
 		Object principal = authentication.getPrincipal();
 
 		// principal이 UserDetails 타입이거나 참조하는 경우 사용자 아이디 반환
