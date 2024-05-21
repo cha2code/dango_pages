@@ -170,12 +170,26 @@ iframe {
     border: 1px solid transparent;
     border-radius: 3px;
 }
+
 .input100 {
     color: #403866;
     line-height: 1.2;
     font-size: 18px;
     position: relative;
     display: inline-block;
+    width: 100%;
+    background: 0 0;
+    height: 62px;
+    padding: 0 10px 0 10px;
+}
+
+.info100 {
+    color: #403866;
+    line-height: 1.2;
+    font-size: 23px;
+    position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
     background: 0 0;
     height: 62px;

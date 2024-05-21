@@ -38,8 +38,12 @@ public class WebSecurityConfig {
 		                .csrfTokenRepository(new HttpSessionCsrfTokenRepository())
 		           .and()
 		           .authorizeRequests()
+		                // 정적 리소스 모두 허용
+						.antMatchers("/common/**", "/dist/**","/plugins/**").permitAll()
 		                // 로그인, 회원가입 페이지는 익명 사용자만 접근 가능
 		                .antMatchers("/login", "/signup").anonymous()
+		                // 로그인 한 사용자만 접근 가능
+						.antMatchers("/userInfo").authenticated()
 						.anyRequest().permitAll()
 		           .and()
 		           // 로그인 설정

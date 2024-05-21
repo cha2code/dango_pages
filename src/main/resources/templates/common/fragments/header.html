@@ -64,8 +64,9 @@
                     </div>
                     <!-- 로그인 한 사용자 표시 메뉴 -->
                     <div sec:authorize="isAuthenticated()" class="col-lg-4 col-md-6 col-12 d-flex justify-content-end">
-                        <a href="#" class="btn" role="button">
-                            정보수정
+                        <a th:href="@{/userInfo/{userId}(userId=${#authentication.principal.username})}"
+                           class="btn" role="button">
+                            마이페이지
                         </a>
                         <form th:action="@{/logout}" method="post">
                             <input type="submit" class="btn" value="로그아웃">

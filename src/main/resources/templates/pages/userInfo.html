@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>dango</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+    <!-- Login CSS -->
+    <link rel="stylesheet" href="/dist/css/utils.css">
+    <link rel="stylesheet" href="/dist/css/user.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+    <!-- User Information Area -->
+    <div class="limiter">
+        <div class="container-user100">
+            <div class="wrap-user100">
+                <span class="user100-form-title p-b-51 m-t-100">
+                    마이페이지
+                </span>
+                <!-- ID -->
+                <div class="m-b-40 div-block">
+                    <p class="m-b-8 txt1">
+                        <strong>아이디</strong>
+                    </p>
+                    <div class="wrap-input100">
+                        <p class="info100" th:text="${userInfo.userId}"></p>
+                    </div>
+                </div>
+                <!-- Nickname -->
+                <div class="m-b-40 div-block">
+                    <p class="m-b-8 txt1">
+                        <strong>닉네임</strong>
+                    </p>
+                    <div class="wrap-input100">
+                        <p class="info100" th:text="${userInfo.nickname}"></p>
+                    </div>
+                </div>
+                <!-- Email -->
+                <div class="m-b-40 div-block">
+                    <p class="m-b-8 txt1">
+                        <strong>이메일</strong>
+                    </p>
+                    <div class="wrap-input100">
+                        <p class="info100" th:text="${userInfo.email}"></p>
+                    </div>
+                </div>
+                <br>
+                <!-- Update Button -->
+                <div class="container-user100-form-btn m-t-17 m-b-100">
+                    <button type="button" class="user100-form-btn">
+                        정보수정
+                    </button>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <div class="col-12 d-flex justify-content-center">
+                        <a href="#" class="txt1">
+                            회원탈퇴
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>
