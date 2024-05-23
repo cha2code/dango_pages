@@ -69,7 +69,7 @@ $("document").ready(() => {
 
     /* 비밀번호 유효성 검사 */
     userPw.blur(() => {
-        const inputPw = $("#password").val(); // 입력 받은 아이디
+        const inputPw = $("#password").val(); // 입력 받은 비밀번호
         const message = $("#pwCheckInputBox"); // 비밀번호 적합 유무 메세지
 
         // 비밀번호 유효성 검사 결과가 true 일 때

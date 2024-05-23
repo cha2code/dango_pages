@@ -9,7 +9,7 @@
 
     <!-- Common Configuration -->
     <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
-    <!-- Login CSS -->
+    <!-- CSS -->
     <link rel="stylesheet" href="/dist/css/utils.css">
     <link rel="stylesheet" href="/dist/css/user.css">
     <!-- JQuery -->
@@ -34,6 +34,16 @@
                         <p class="info100" th:text="${userInfo.userId}"></p>
                     </div>
                 </div>
+                <!-- Password -->
+                <div class="m-b-40 div-block">
+                    <p class="m-b-8 txt1">
+                        <strong>비밀번호</strong>
+                    </p>
+                    <div class="wrap-input100">
+                        <p class="info100">●●●●●●●●●●</p>
+                        <a href="#" class="check-btn d-flex" role="button">수정</a>
+                    </div>
+                </div>
                 <!-- Nickname -->
                 <div class="m-b-40 div-block">
                     <p class="m-b-8 txt1">
@@ -41,6 +51,7 @@
                     </p>
                     <div class="wrap-input100">
                         <p class="info100" th:text="${userInfo.nickname}"></p>
+                        <a th:href="@{/modifyNickname}" class="check-btn d-flex" role="button">수정</a>
                     </div>
                 </div>
                 <!-- Email -->
@@ -50,18 +61,12 @@
                     </p>
                     <div class="wrap-input100">
                         <p class="info100" th:text="${userInfo.email}"></p>
+                        <a href="#" class="check-btn d-flex" role="button">수정</a>
                     </div>
                 </div>
                 <br>
                 <!-- Update Button -->
                 <div class="container-user100-form-btn m-t-17 m-b-100">
-                    <button type="button" class="user100-form-btn">
-                        정보수정
-                    </button>
-                    <br>
-                    <br>
-                    <br>
-                    <br>
                     <div class="col-12 d-flex justify-content-center">
                         <a href="#" class="txt1">
                             회원탈퇴

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.cha2code.dango_pages.dto.RoleMasterDTO;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.util.ObjectUtils;
@@ -32,6 +33,17 @@ public class RoleMaster extends BaseAuditorEntity {
 
 	@Column(name = "memo", length = 200)
 	private String memo;
+
+	@Transient
+	public RoleMasterDTO toDTO() {
+		return new RoleMasterDTO(roleCode,
+		                         roleName,
+								 memo,
+		                         getCreateUser(),
+		                         getCreateDate(),
+		                         getModifyUser(),
+		                         getModifyDate());
+	}
 
 	/** 권한 이름, 메모 수정을 위한 method */
 	public RoleMaster updateData(String roleName, String memo) {

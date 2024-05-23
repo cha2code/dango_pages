@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.cha2code.dango_pages.dto.MailCheckDTO;
 import org.cha2code.dango_pages.dto.UserExistCheckDTO;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
+import org.cha2code.dango_pages.dto.UserRoleDTO;
 import org.cha2code.dango_pages.service.MailService;
 import org.cha2code.dango_pages.service.UserService;
 import org.springframework.util.StringUtils;
@@ -113,11 +114,18 @@ public class UserRestController {
 		boolean result = false;
 
 		// form에서 전달 받은 데이터가 있을 경우
-		if (requestData != null) {
+		if(requestData != null) {
 			// UserMasterDTO 값을 List<UserMasterDTO> 값으로 저장
 			List<UserMasterDTO> dataList = Collections.singletonList(requestData);
-			// 사용자 생성 결과 저장
-			result = userService.createData(dataList);
+
+			// UserRoleDTO에 사용자 ID, 기본 권한을 가진 객체 생성
+			UserRoleDTO userRole = new UserRoleDTO(requestData.userId(), "user");
+
+			// UserRoleDTO 값을 List<UserRoleDTO>로 저장
+			List<UserRoleDTO> roleList = Collections.singletonList(userRole);
+
+			// UserService에서 사용자 및 권한 생성 결과 반환
+			result = userService.createData(dataList, roleList);
 		}
 
 		return result;

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 /**
  * 사용자 페이지 표시 및 데이터 전송을 위한 Controller
  */
@@ -25,10 +27,9 @@ public class UserController {
 	 * @return 사용자 정보 페이지
 	 */
 	@GetMapping("/userInfo")
-	public String getUser(Model model) {
-		// Security session에 저장되어 있는 사용자 ID 저장
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userId = authentication.getName();
+	public String getUser(Principal principal, Model model) {
+		// session에 저장되어 있는 사용자 ID 저장
+		String userId = principal.getName();
 
 		// 아이디로 사용자의 정보 검색 후 DTO에 저장
 		UserMasterDTO userInfo = userService.getUserInfo(userId);
@@ -37,5 +38,23 @@ public class UserController {
 		model.addAttribute("userInfo", userInfo);
 
 		return "pages/userInfo";
+	}
+
+	/**
+	 * 사용자 수정 페이지를 출력한다.
+	 * @return 사용자 정보 수정 페이지
+	 */
+	@GetMapping("/modifyNickname")
+	public String modifyUserInfo(Principal principal, Model model) {
+		// session에 저장되어 있는 사용자 ID 저장
+		String userId = principal.getName();
+
+		// 아이디로 사용자의 정보 검색 후 DTO에 저장
+		UserMasterDTO userInfo = userService.getUserInfo(userId);
+
+		// view로 사용자 정보 전달
+		model.addAttribute("userInfo", userInfo);
+
+		return "pages/user/modify/modifyNickname";
 	}
 }
