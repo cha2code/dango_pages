@@ -52,6 +52,31 @@ public class UserMaster extends BaseAuditorEntity {
 		return this;
 	}
 
+	/**
+	 * update 되는 사용자 정보를 반환한다.
+	 * @param encoder 비밀번호 암호화
+	 * @param userPassword 사용자 비밀번호
+	 * @param nickname 사용자 닉네임
+	 * @param email 사용자 이메일
+	 * @return 사용자 정보
+	 */
+	public UserMaster updateData(PasswordEncoder encoder, String userPassword, String nickname, String email) {
+		if (StringUtils.hasText(userPassword) && !encoder.matches(userPassword, this.userPassword)) {
+			this.userPassword = userPassword;
+			this.passwordModifiedAt = LocalDateTime.now();
+		}
+
+		if (StringUtils.hasText(nickname) && !this.nickname.equals(nickname)) {
+			this.nickname = nickname;
+		}
+
+		if (StringUtils.hasText(email) && !this.email.equals(email)) {
+			this.email = email;
+		}
+
+		return this;
+	}
+
 	// entity -> DTO 변환 메소드 (트랜잭션 처리 예외)
 	@Transient
 	public UserMasterDTO toDTO() {

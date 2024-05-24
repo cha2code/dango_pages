@@ -2,6 +2,7 @@ package org.cha2code.dango_pages.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.cha2code.dango_pages.dto.UserExistCheckDTO;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.dto.UserRoleDTO;
 import org.cha2code.dango_pages.entity.UserMaster;
@@ -12,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -73,7 +75,7 @@ public class UserService {
 	 * @return true/false
 	 */
 	@Transactional
-	public boolean createData(List<UserMasterDTO> dataList, List<UserRoleDTO> userRole) {
+	public boolean createUser(List<UserMasterDTO> dataList, List<UserRoleDTO> userRole) {
 		// 사용자 정보를 entity로 변환 후 비밀번호 암호화하여 List에 저장
 		List<UserMaster> list = dataList.stream()
 										.map(UserMasterDTO::toEntity)
@@ -89,9 +91,42 @@ public class UserService {
 		                                  .toList();
 
 		// entity로 변환한 사용자 권한 정보를 DB에 저장
-		List<UserRole> resultRoleList = userRoleRepo.saveAll(roleList);
+		userRoleRepo.saveAll(roleList);
 
 		// 생성자와 생성일자 유무 체크 후 결과 반환
 		return resultList.stream().allMatch(UserMaster::isCreated);
+	}
+
+	/**
+	 * 입력받은 정보로 사용자의 정보를 수정 후 결과를 반환한다.
+	 * @param updateList 수정할 사용자 데이터 리스트
+	 * @return true/false 수정 결과
+	 */
+	@Transactional
+	public boolean updateUser(List<UserMasterDTO> updateList) {
+		// 정보를 수정할 사용자 아이디 저장
+		List<String> idList = updateList.stream()
+		                              .map(UserMasterDTO::userId)
+		                              .toList();
+
+		// 위에서 저장한 사용자 아이디로 DB에서 해당 사용자 검색
+		List<UserMaster> targetList = userRepo.findAllById(idList);
+
+		// DB에서 검색한 사용자 정보를 수정 데이터로 업데이트
+		for (UserMaster target : targetList) {
+			for (UserMasterDTO source : updateList) {
+				if (target.getUserId().equals(source.userId())) {
+					target.updateData(passwordEncoder,
+					                  source.userPassword(),
+					                  source.nickname(),
+					                  source.email());
+				}
+			}
+		}
+
+		// 수정한 사용자 정보를 DB에 저장
+		userRepo.saveAll(targetList);
+
+		return true;
 	}
 }

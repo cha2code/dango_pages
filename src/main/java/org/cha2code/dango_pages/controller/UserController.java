@@ -4,8 +4,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.service.UserService;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +42,8 @@ public class UserController {
 	 * 사용자 수정 페이지를 출력한다.
 	 * @return 사용자 정보 수정 페이지
 	 */
-	@GetMapping("/modifyNickname")
-	public String modifyUserInfo(Principal principal, Model model) {
+	@GetMapping("/updateNickname")
+	public String updateUserInfo(Principal principal, Model model) {
 		// session에 저장되어 있는 사용자 ID 저장
 		String userId = principal.getName();
 
@@ -55,6 +53,6 @@ public class UserController {
 		// view로 사용자 정보 전달
 		model.addAttribute("userInfo", userInfo);
 
-		return "pages/user/modify/modifyNickname";
+		return "pages/user/update/updateNickname";
 	}
 }

@@ -9,9 +9,11 @@
 
     <!-- Common Configuration -->
     <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+
     <!-- CSS -->
     <link rel="stylesheet" href="/dist/css/utils.css">
     <link rel="stylesheet" href="/dist/css/user.css">
+
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 </head>
@@ -51,7 +53,7 @@
                     </p>
                     <div class="wrap-input100">
                         <p class="info100" th:text="${userInfo.nickname}"></p>
-                        <a th:href="@{/modifyNickname}" class="check-btn d-flex" role="button">수정</a>
+                        <a th:href="@{/updateNickname}" class="check-btn d-flex" role="button">수정</a>
                     </div>
                 </div>
                 <!-- Email -->

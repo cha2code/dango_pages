@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <title>dango</title>
+
+  <!-- default header name is X-CSRF-TOKEN -->
+  <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+  <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+  <meta name="description" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Common Configuration -->
+  <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/dist/css/utils.css">
+  <link rel="stylesheet" href="/dist/css/user.css">
+
+  <!-- JQuery -->
+  <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+  <!-- updateUserInfo Javascript -->
+  <script type="text/javascript" th:src="@{dist/js/updateUserInfo.js}"></script>
+</head>
+<body>
+  <!-- Header Area -->
+  <header th:replace="~{common/fragments/header :: header}"></header>
+
+  <!-- Update User Nickname Area -->
+  <div class="limiter">
+    <div class="container-user100">
+      <div class="wrap-user100">
+        <span class="user100-form-title p-b-51 m-t-100">
+                    닉네임 수정
+        </span>
+        <form id="updateForm" class="user100-form flex-sb flex-w">
+          <!-- 사용자 정보 -->
+          <input type="hidden" class="userId" id="userId" th:value="${userInfo.userId}">
+          <input type="hidden" class="email" id="email" th:value="${userInfo.email()}">
+          <input type="hidden" class="password" id="password" th:value="${userInfo.userPassword()}">
+
+          <!-- Nickname -->
+          <div class="m-b-40 div-block">
+            <div class="wrap-input100">
+              <input class="input100" type="text" id="nickname" name="nickname"
+                     placeholder="2~6자의 영문, 숫자, 한글만 가능합니다.">
+              <span class="focus-input100"></span>
+            </div>
+            <!-- 닉네임 사용 가능 여부 메세지 -->
+            <span id="nickCheckInputBox"></span>
+          </div>
+
+          <!-- Update User Information Button -->
+          <div class="container-user100-form-btn m-t-17 m-b-100">
+            <button type="submit" class="user100-form-btn">
+              정보 수정
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- Footer Area -->
+  <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+  <!-- Scroll Top -->
+  <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>

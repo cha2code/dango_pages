@@ -109,7 +109,7 @@ public class UserRestController {
 	 * @param requestData 사용자 등록 요청 데이터
 	 * @return true/false
 	 */
-	@PostMapping("/createUser")
+	@PostMapping("createUser")
 	public boolean createUser(@RequestBody UserMasterDTO requestData) {
 		boolean result = false;
 
@@ -125,7 +125,27 @@ public class UserRestController {
 			List<UserRoleDTO> roleList = Collections.singletonList(userRole);
 
 			// UserService에서 사용자 및 권한 생성 결과 반환
-			result = userService.createData(dataList, roleList);
+			result = userService.createUser(dataList, roleList);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 사용자 정보 수정 결과를 반환한다.
+	 * @param updateData 수정할 사용자 정보
+	 * @return 사용자 정보 저장 결과
+	 */
+	@PostMapping("updateUserInfo")
+	public boolean updateUser(@RequestBody UserMasterDTO updateData) {
+		boolean result = false;
+
+		// 입력 받은 데이터가 있을 경우
+		if(updateData != null) {
+			// DTO -> List 로 변환
+			List<UserMasterDTO> updateList = Collections.singletonList(updateData);
+			// Service를 통해 정보 수정 후 반환되는 결과 저장
+			result = userService.updateUser(updateList);
 		}
 
 		return result;
