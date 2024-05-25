@@ -54,18 +54,11 @@ public class UserMaster extends BaseAuditorEntity {
 
 	/**
 	 * update 되는 사용자 정보를 반환한다.
-	 * @param encoder 비밀번호 암호화
-	 * @param userPassword 사용자 비밀번호
 	 * @param nickname 사용자 닉네임
 	 * @param email 사용자 이메일
 	 * @return 사용자 정보
 	 */
-	public UserMaster updateData(PasswordEncoder encoder, String userPassword, String nickname, String email) {
-		if (StringUtils.hasText(userPassword) && !encoder.matches(userPassword, this.userPassword)) {
-			this.userPassword = userPassword;
-			this.passwordModifiedAt = LocalDateTime.now();
-		}
-
+	public UserMaster updateData(String nickname, String email) {
 		if (StringUtils.hasText(nickname) && !this.nickname.equals(nickname)) {
 			this.nickname = nickname;
 		}
@@ -77,7 +70,25 @@ public class UserMaster extends BaseAuditorEntity {
 		return this;
 	}
 
-	// entity -> DTO 변환 메소드 (트랜잭션 처리 예외)
+	/**
+	 * 수정되는 사용자 비밀번호를 암호화 후 반환한다.
+	 * @param encoder 비밀번호 암호화
+	 * @param userPassword 사용자 비밀번호
+	 * @return 사용자의 비밀번호 정보
+	 */
+	public UserMaster updatePassword(PasswordEncoder encoder, String userPassword) {
+		if (StringUtils.hasText(userPassword) && !encoder.matches(userPassword, this.userPassword)) {
+			this.userPassword = encoder.encode(userPassword);
+			this.passwordModifiedAt = LocalDateTime.now();
+		}
+
+		return this;
+	}
+
+	/**
+	 * entity -> DTO로 변환 후 반환한다.
+	 * @return UserMasterDTO 사용자 DTO 객체
+	 */
 	@Transient
 	public UserMasterDTO toDTO() {
 		return new UserMasterDTO(userId,
@@ -91,7 +102,10 @@ public class UserMaster extends BaseAuditorEntity {
 		                         getModifyDate());
 	}
 
-	// 생성자와 생성일자 유무 체크
+	/**
+	 * 생성일자 및 생성자 유무를 체크 후 반환한다.
+	 * @return true/false
+	 */
 	@Transient
 	public boolean isCreated() {
 		return StringUtils.hasText(getCreateUser()) && !ObjectUtils.isEmpty(getCreateDate());

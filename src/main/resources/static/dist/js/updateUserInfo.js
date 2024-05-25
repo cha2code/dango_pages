@@ -11,44 +11,17 @@ $("document").ready(() => {
     });
 
     /* DOM Selector 호출 결과를 저장하는 변수 */
-    const userPw = $("#password");
     const userNick = $("#nickname");
     const checkBtn = $("#checkBtn");
     const mailCheck = $("#mailCheck");
 
     /* 항목별 유효성 체크를 위한 변수 */
-    let passPw = false;
     let passNick = false;
     let passMail = false;
     let message = "";
 
     /* 입력받은 값 저장 */
     const userId = $("#userId").val();
-
-    /* 비밀번호 유효성 검사 */
-    userPw.blur(() => {
-        const inputPw = $("#password").val();
-        message = $("#pwCheckInputBox"); // 비밀번호 적합 유무 메세지
-
-        // 비밀번호 유효성 검사 결과가 true 일 때
-        if(pwRegex(inputPw)) {
-            message.html("사용 가능한 비밀번호입니다.");
-            passPw = true;
-        }
-
-        else {
-            message.html("비밀번호는 8자리 이상의 영문+숫자+특수문자(@$!%*#?&)로 입력하세요.");
-            passPw = false;
-        }
-    });
-
-    // 비밀번호 형식 검사
-    function pwRegex(inputPw) {
-        const form = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/;
-
-        // 정규표현식 조건에 적합하면 true, 아니면 false 반환
-        return form.test(inputPw);
-    }
 
     /* 닉네임 중복 및 유효성 검사 */
     userNick.blur(() => {
@@ -161,13 +134,12 @@ $("document").ready(() => {
         event.preventDefault();
 
         // 입력 값이 하나라도 있을 경우
-        if(passPw || passNick || passMail === true) {
+        if(passNick || passMail === true) {
             $.ajax({
                 type: "post",
                 url: "/updateUserInfo",
                 data: JSON.stringify({
                     userId: $("#userId").val(),
-                    userPassword: $("#password").val(),
                     nickname: $("#nickname").val(),
                     email: $("#email").val()
                 }),

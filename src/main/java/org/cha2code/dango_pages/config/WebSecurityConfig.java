@@ -42,8 +42,8 @@ public class WebSecurityConfig {
 						.antMatchers("/common/**", "/dist/**","/plugins/**").permitAll()
 		                // 로그인, 회원가입 페이지는 익명 사용자만 접근 가능
 		                .antMatchers("/login", "/signup").anonymous()
-		                // 로그인 한 사용자만 접근 가능
-						.antMatchers("/userInfo").authenticated()
+		                // 인증된 사용자만 접근 가능
+						.antMatchers("/userInfo", "/updateNickname", "/updatePassword").authenticated()
 						.anyRequest().permitAll()
 		           .and()
 		           // 로그인 설정
@@ -53,13 +53,13 @@ public class WebSecurityConfig {
 		                // 로그인 페이지에서 전달하는 ID 파라미터의 명칭
 		                .usernameParameter("username")
 		                // 로그인 페이지에서 전달하는 비밀번호 파라미터의 명칭
-		                 .passwordParameter("password")
+		                .passwordParameter("password")
 		                // 로그인 성공시
-		                 .successHandler((request, response, authentication) -> {
+		                .successHandler((request, response, authentication) -> {
 				           request.getSession().setAttribute("userInfo", authentication.getPrincipal());
 				           log.info("authentication : " + authentication.getName());
 				           response.sendRedirect("/");
-		                 })
+		                })
 		                 // 로그인 실패시
 		                .failureHandler((request, response, exception) -> {
 			                log.info("exception : " + exception.getMessage());

@@ -21,7 +21,8 @@ public class UserController {
 
 	/**
 	 * 로그인 한 사용자의 아이디를 통해 정보를 가져온다.
-	 * @param model view로 전달할 데이터
+	 * @param principal 세션에 저장 된 사용자 정보
+	 * @param model view로 전달할 사용자 아이디
 	 * @return 사용자 정보 페이지
 	 */
 	@GetMapping("/userInfo")
@@ -39,11 +40,13 @@ public class UserController {
 	}
 
 	/**
-	 * 사용자 수정 페이지를 출력한다.
+	 * 사용자 정보 수정 페이지를 반환한다.
+	 * @param principal 세션에 저장 된 사용자 정보
+	 * @param model view로 전달할 사용자 아이디
 	 * @return 사용자 정보 수정 페이지
 	 */
 	@GetMapping("/updateNickname")
-	public String updateUserInfo(Principal principal, Model model) {
+	public String updateUserNick(Principal principal, Model model) {
 		// session에 저장되어 있는 사용자 ID 저장
 		String userId = principal.getName();
 
@@ -54,5 +57,22 @@ public class UserController {
 		model.addAttribute("userInfo", userInfo);
 
 		return "pages/user/update/updateNickname";
+	}
+
+	/**
+	 * 사용자 비밀번호 수정 페이지를 반환한다.
+	 * @param principal 세션에 저장 된 사용자 정보
+	 * @param model view로 전달할 사용자 아이디
+	 * @return 사용자 비밀번호 수정 페이지
+	 */
+	@GetMapping("/updatePassword")
+	public String updateUserPassword(Principal principal, Model model) {
+		// session에 저장되어 있는 사용자 ID 저장
+		String userId = principal.getName();
+
+		// view로 사용자 아이디 전달
+		model.addAttribute("userId", userId);
+
+		return "pages/user/update/updatePassword";
 	}
 }

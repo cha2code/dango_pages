@@ -2,7 +2,6 @@ package org.cha2code.dango_pages.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.cha2code.dango_pages.dto.UserExistCheckDTO;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.dto.UserRoleDTO;
 import org.cha2code.dango_pages.entity.UserMaster;
@@ -13,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +38,21 @@ public class UserService {
 		// UserMaster로 받은 객체를 DTO로 변환 후 결과 반환
 		return userMaster.map(UserMaster::toDTO)
 		                 .orElse(null);
+	}
+
+	/**
+	 * 사용자 비밀번호와 입력 받은 비밀번호의 일치 여부 확인 후 결과를 반환한다.
+	 * @param userInfo DB에 저장 된 사용자 정보
+	 * @param password 입력 받은 비밀번호
+	 * @return true/false 비밀번호 일치 여부
+	 */
+	public boolean matchesPassword(UserMasterDTO userInfo, String password) {
+		// 사용자 비밀번호 비교 (수정할 비밀번호, DB에 암호화되어 저장 된 비밀번호)
+		if(passwordEncoder.matches(password, userInfo.userPassword())) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -116,10 +129,39 @@ public class UserService {
 		for (UserMaster target : targetList) {
 			for (UserMasterDTO source : updateList) {
 				if (target.getUserId().equals(source.userId())) {
-					target.updateData(passwordEncoder,
-					                  source.userPassword(),
-					                  source.nickname(),
+					target.updateData(source.nickname(),
 					                  source.email());
+				}
+			}
+		}
+
+		// 수정한 사용자 정보를 DB에 저장
+		userRepo.saveAll(targetList);
+
+		return true;
+	}
+
+	/**
+	 * 비밀번호 수정 후 결과를 반환한다.
+	 * @param updateList 수정할 비밀번호 정보 리스트
+	 * @return true/false 수정 결과
+	 */
+	@Transactional
+	public boolean updatePassword(List<UserMasterDTO> updateList) {
+		// 정보를 수정할 사용자 아이디 저장
+		List<String> idList = updateList.stream()
+		                                .map(UserMasterDTO::userId)
+		                                .toList();
+
+		// 위에서 저장한 사용자 아이디로 DB에서 해당 사용자 검색
+		List<UserMaster> targetList = userRepo.findAllById(idList);
+
+		// DB에서 검색한 사용자 정보를 수정 데이터로 업데이트
+		for (UserMaster target : targetList) {
+			for (UserMasterDTO source : updateList) {
+				if (target.getUserId().equals(source.userId())) {
+					target.updatePassword(passwordEncoder,
+					                      source.userPassword());
 				}
 			}
 		}

@@ -3,7 +3,6 @@ package org.cha2code.dango_pages.repository;
 import org.cha2code.dango_pages.entity.UserMaster;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 
 import java.util.Optional;
 

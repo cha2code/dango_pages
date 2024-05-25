@@ -26,10 +26,12 @@ public class UserRestController {
 	private final UserService userService;
 	private final MailService mailService;
 
+	boolean result = false; // 수행 결과 반환을 위한 변수
+
 	/**
 	 * 아이디 중복 검사 결과를 반환한다.
 	 * @param userCheckDTO UserExistCheckDTO
-	 * @return true/false 아이디 유무 결과 반환
+	 * @return 아이디 유무 결과 반환
 	 */
 	@PostMapping("inputId")
 	public boolean searchId(@RequestBody UserExistCheckDTO userCheckDTO){
@@ -42,16 +44,16 @@ public class UserRestController {
 
 			// 중복된 아이디가 없는 경우
 			if (userCnt == 0) {
-				return true;
+				result = true;
 			}
 		}
-		return false;
+		return result;
 	}
 
 	/**
 	 * 닉네임 중복 검사 결과를 반환한다.
 	 * @param userCheckDTO UserExistCheckDTO
-	 * @return true/false 닉네임 유무 결과 반환
+	 * @return 닉네임 유무 결과 반환
 	 */
 	@PostMapping("inputNick")
 	public boolean searchNickname(@RequestBody UserExistCheckDTO userCheckDTO) {
@@ -64,16 +66,16 @@ public class UserRestController {
 
 			// 중복된 닉네임이 없는 경우
 			if(nickCnt == 0) {
-				return true;
+				result = true;
 			}
 		}
-		return false;
+		return result;
 	}
 
 	/**
-	 * 이메일 중복 검사 결과 및 인증 코드를 반환한다.
+	 * 이메일 중복 검사 결과 또는 인증 코드를 반환한다.
 	 * @param mailCheckDTO UserExistCheckDTO
-	 * @return true/false 이메일 중복 결과 또는 인증 코드 반환
+	 * @return 이메일 중복 결과 또는 인증 코드 반환
 	 */
 	@PostMapping("inputEmail")
 	public String searchEmail(@RequestBody MailCheckDTO mailCheckDTO) throws MessagingException {
@@ -98,6 +100,7 @@ public class UserRestController {
 			// 생성한 인증 코드 포함 후 메일 발송
 			mailService.CreateMail(mailCheckDTO);
 
+			// 발송된 인증 코드 반환
 			return mailCheckDTO.getCheckCode();
 		}
 
@@ -105,14 +108,28 @@ public class UserRestController {
 	}
 
 	/**
+	 * 사용자의 기존 비밀번호 일치 여부를 반환한다.
+	 * @param user 사용자 정보
+	 * @return 비밀번호 비교 결과
+	 */
+	@PostMapping("existPwCheck")
+	public boolean existPasswordCheck(@RequestBody UserMasterDTO user) {
+		// service에서 사용자 아이디 검색
+		UserMasterDTO userInfo = userService.getUserInfo(user.userId());
+
+		// 저장된 사용자의 비밀번호와 입력 받은 비밀번호 비교 결과 저장
+		result = userService.matchesPassword(userInfo, user.userPassword());
+
+		return result;
+	}
+
+	/**
 	 * 사용자 생성 결과를 반환한다.
 	 * @param requestData 사용자 등록 요청 데이터
-	 * @return true/false
+	 * @return 사용자 생성 결과
 	 */
 	@PostMapping("createUser")
 	public boolean createUser(@RequestBody UserMasterDTO requestData) {
-		boolean result = false;
-
 		// form에서 전달 받은 데이터가 있을 경우
 		if(requestData != null) {
 			// UserMasterDTO 값을 List<UserMasterDTO> 값으로 저장
@@ -138,14 +155,30 @@ public class UserRestController {
 	 */
 	@PostMapping("updateUserInfo")
 	public boolean updateUser(@RequestBody UserMasterDTO updateData) {
-		boolean result = false;
-
 		// 입력 받은 데이터가 있을 경우
 		if(updateData != null) {
 			// DTO -> List 로 변환
 			List<UserMasterDTO> updateList = Collections.singletonList(updateData);
 			// Service를 통해 정보 수정 후 반환되는 결과 저장
 			result = userService.updateUser(updateList);
+		}
+
+		return result;
+	}
+
+	/**
+	 * 사용자 비밀번호 수정 결과를 반환한다.
+	 * @param updatePassword 수정할 사용자 아이디와 비밀번호
+	 * @return 사용자 비밀번호 수정 결과
+	 */
+	@PostMapping("updateUserPassword")
+	public boolean updateUserPassword(@RequestBody UserMasterDTO updatePassword) {
+		// 입력 받은 데이터가 있을 경우
+		if(updatePassword != null) {
+			// DTO -> List 로 변환
+			List<UserMasterDTO> updateList = Collections.singletonList(updatePassword);
+			// Service를 통해 정보 수정 후 반환되는 결과 저장
+			result = userService.updatePassword(updateList);
 		}
 
 		return result;
