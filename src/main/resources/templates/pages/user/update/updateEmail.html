@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>dango :: Sign up</title>
+
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+
+    <!-- Login CSS -->
+    <link rel="stylesheet" type="text/css" href="/dist/css/utils.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/user.css">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- updateUserInfo Javascript -->
+    <script type="text/javascript" th:src="@{dist/js/updateUserInfo.js}"></script>
+</head>
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+    <!-- Update User Email Area -->
+    <div class="limiter">
+        <div class="container-user100">
+            <div class="wrap-user100">
+                <form id="updateForm" class="user100-form flex-sb flex-w">
+                    <!-- 사용자 정보 -->
+                    <input type="hidden" class="userId" id="userId" th:value="${userInfo.userId}">
+                    <input type="hidden" class="nickname" id="nickname" th:value="${userInfo.nickname}">
+
+                    <span class="user100-form-title p-b-51 m-t-100">
+                        이메일 수정
+                    </span>
+                    <!-- e-mail -->
+                    <div class="m-b-10 div-block">
+                        <p class="m-b-8 txt1">
+                            <strong>이메일</strong>
+                        </p>
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" id="email" name="email" placeholder="이메일 입력">
+                            <button type="button" id="checkBtn" class="check-btn">인증요청</button>
+                            <span class="focus-input100"></span>
+                        </div>
+                        <!-- 이메일 사용 가능 여부 메세지 -->
+                        <span id="mailCheckInputBox"></span>
+                    </div>
+                    <!-- Authentication Area -->
+                    <div class="m-b-40 div-block">
+                        <div class="wrap-input100">
+                            <input class="input100" type="text" id="mailCheck" name="mailCheck" placeholder="인증코드 입력">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <!-- 인증번호 일치 여부 메세지 -->
+                        <span id="codeCheckInputBox"></span>
+                    </div>
+                    <!-- Update User Information Button -->
+                    <div class="container-user100-form-btn m-t-17 m-b-100">
+                        <button type="submit" class="user100-form-btn">
+                            정보 수정
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>

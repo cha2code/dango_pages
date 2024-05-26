@@ -40,10 +40,10 @@ public class UserController {
 	}
 
 	/**
-	 * 사용자 정보 수정 페이지를 반환한다.
+	 * 사용자 닉네임 수정 페이지를 반환한다.
 	 * @param principal 세션에 저장 된 사용자 정보
-	 * @param model view로 전달할 사용자 아이디
-	 * @return 사용자 정보 수정 페이지
+	 * @param model view로 전달할 사용자 정보
+	 * @return 사용자 닉네임 수정 페이지
 	 */
 	@GetMapping("/updateNickname")
 	public String updateUserNick(Principal principal, Model model) {
@@ -74,5 +74,25 @@ public class UserController {
 		model.addAttribute("userId", userId);
 
 		return "pages/user/update/updatePassword";
+	}
+
+	/**
+	 * 사용자 이메일 수정 페이지를 반환한다.
+	 * @param principal 세션에 저장 된 사용자 정보
+	 * @param model view로 전달할 사용자 아이디
+	 * @return 사용자 이메일 수정 페이지
+	 */
+	@GetMapping("/updateEmail")
+	public String updateUserEmail(Principal principal, Model model) {
+		// session에 저장되어 있는 사용자 ID 저장
+		String userId = principal.getName();
+
+		// 아이디로 사용자의 정보 검색 후 DTO에 저장
+		UserMasterDTO userInfo = userService.getUserInfo(userId);
+
+		// view로 사용자 정보 전달
+		model.addAttribute("userInfo", userInfo);
+
+		return "pages/user/update/updateEmail";
 	}
 }

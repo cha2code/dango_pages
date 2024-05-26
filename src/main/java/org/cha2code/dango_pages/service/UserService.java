@@ -48,11 +48,7 @@ public class UserService {
 	 */
 	public boolean matchesPassword(UserMasterDTO userInfo, String password) {
 		// 사용자 비밀번호 비교 (수정할 비밀번호, DB에 암호화되어 저장 된 비밀번호)
-		if(passwordEncoder.matches(password, userInfo.userPassword())) {
-			return true;
-		}
-
-		return false;
+		return passwordEncoder.matches(password, userInfo.userPassword());
 	}
 
 	/**
@@ -122,6 +118,8 @@ public class UserService {
 		                              .map(UserMasterDTO::userId)
 		                              .toList();
 
+		log.info("idList : " + idList);
+
 		// 위에서 저장한 사용자 아이디로 DB에서 해당 사용자 검색
 		List<UserMaster> targetList = userRepo.findAllById(idList);
 
@@ -134,6 +132,8 @@ public class UserService {
 				}
 			}
 		}
+
+		log.info("targetList : " + targetList);
 
 		// 수정한 사용자 정보를 DB에 저장
 		userRepo.saveAll(targetList);

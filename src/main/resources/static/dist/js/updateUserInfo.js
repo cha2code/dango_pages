@@ -135,6 +135,7 @@ $("document").ready(() => {
 
         // 입력 값이 하나라도 있을 경우
         if(passNick || passMail === true) {
+            console.log("true");
             $.ajax({
                 type: "post",
                 url: "/updateUserInfo",
