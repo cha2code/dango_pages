@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>dango :: Item</title>
+
+    <!-- default header name is X-CSRF-TOKEN -->
+    <meta id="_csrf" name="_csrf" th:content="${_csrf.token}"/>
+    <meta id="_csrf_header" name="_csrf_header" th:content="${_csrf.headerName}"/>
+
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="/dist/css/utils.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/user.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/board.css">
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+    <!-- Item Area -->
+    <div class="limiter">
+        <div class="container-board100">
+            <div class="wrap-board100">
+                <form id="itemForm" class="user100-form flex-sb flex-w" enctype="multipart/form-data">
+                    <span class="user100-form-title p-b-70 m-t-100">
+                        상품 등록
+                    </span>
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt-black">
+                            상품명
+                        </p>
+                        <div class="wrap-board-input100">
+                            <input class="board-input100" type="text" id="title" name="title"
+                            placeholder="상품 이름을 입력하세요.">
+                            <span class="focus-input100"></span>
+                        </div>
+                        <!-- 입력 유무 검사 -->
+                        <span id="titleCheckInputBox"></span>
+                    </div>
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt-black">
+                            \ 가격
+                        </p>
+                        <div class="wrap-board-input100">
+                            <input class="board-input100" type="text" id="price" name="price"
+                            placeholder="가격을 입력하세요.">
+                        </div>
+                        <!-- 입력 유무 검사 -->
+                        <span id="priceCheckInputBox"></span>
+                    </div>
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt-black">
+                            상품 설명
+                        </p>
+                        <div class="wrap-board-input100">
+                            <textarea class="board-contents-input100" id="contents" name="contents"
+                                   rows="20" placeholder="상품 설명을 입력하세요."></textarea>
+                        </div>
+                        <!-- 입력 유무 검사 -->
+                        <span id="contentsCheckInputBox"></span>
+                    </div>
+                    <!-- 상품 등록 버튼 -->
+                    <div class="container-board100-form-btn m-t-17 m-b-100">
+                        <button type="submit" class="board100-form-btn">
+                            등록하기
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>

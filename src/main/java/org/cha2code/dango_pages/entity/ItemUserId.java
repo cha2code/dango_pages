@@ -7,22 +7,19 @@ import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Objects;
 
-/**
- * 사용자 권한 테이블의 복합키 설정을 위한 IdClass
- */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class UserRoleId implements Serializable {
-	private static final long serialVersionUID = 6636787881606024025L;
+public class ItemUserId implements Serializable {
+	private static final long serialVersionUID = 5019515664106731614L;
 
 	@Column(name = "user_id", nullable = false, length = 40)
 	private String userId;
 
-	@Column(name = "role_code", nullable = false, length = 40)
-	private String roleCode;
+	@Column(name = "item_id", columnDefinition = "int UNSIGNED not null")
+	private Long itemId;
 
 	@Override
 	public boolean equals(Object o) {
@@ -32,14 +29,13 @@ public class UserRoleId implements Serializable {
 		if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) {
 			return false;
 		}
-		UserRoleId entity = (UserRoleId) o;
-		return Objects.equals(this.roleCode, entity.roleCode) &&
-				Objects.equals(this.userId, entity.userId);
+		ItemUserId entity = (ItemUserId) o;
+		return Objects.equals(this.userId, entity.userId) &&
+				Objects.equals(this.itemId, entity.itemId);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(userId, roleCode);
+		return Objects.hash(userId, itemId);
 	}
-
 }
