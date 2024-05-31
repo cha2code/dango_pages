@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.cha2code.dango_pages.dto.ItemMasterDto;
+import org.cha2code.dango_pages.dto.ItemMasterDTO;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.util.ObjectUtils;
@@ -36,6 +36,9 @@ public class ItemMaster extends BaseAuditorEntity {
 	@Column(name = "nickname", nullable = false, length = 20)
 	private String nickname;
 
+	@Column(name = "image_url", nullable = false, length = 200)
+	private String imageUrl;
+
 	@Column(name = "title", nullable = false, length = 120)
 	private String title;
 
@@ -50,13 +53,14 @@ public class ItemMaster extends BaseAuditorEntity {
 	 * @return ProductMasterDTO DTO 객체
 	 */
 	@Transient
-	public ItemMasterDto toDTO() {
-		return new ItemMasterDto(itemId,
+	public ItemMasterDTO toDTO() {
+		return new ItemMasterDTO(itemId,
 		                         categoryId,
-								 nickname,
+		                         nickname,
+		                         imageUrl,
 		                         title,
 		                         contents,
-								 price,
+		                         price,
 		                         getCreateDate(),
 		                         getModifyDate());
 	}

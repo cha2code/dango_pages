@@ -7,6 +7,9 @@ import javax.persistence.Column;
 import java.io.Serializable;
 import java.util.Objects;
 
+/**
+ * 사용자별 판매글 테이블의 복합키 설정을 위한 IdClass
+ */
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

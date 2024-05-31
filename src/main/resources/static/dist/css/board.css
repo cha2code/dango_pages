@@ -48,6 +48,19 @@
     padding: 0 10px 0 10px;
 }
 
+.board-file-input100 {
+    color: #403866;
+    line-height: 1.2;
+    font-size: 18px;
+    position: relative;
+    display: inline-block;
+    align-content: center;
+    width: 100%;
+    background: 0 0;
+    height: 50px;
+    padding: 0 10px 0 10px;
+}
+
 .board-contents-input100 {
     color: #403866;
     line-height: 1.2;

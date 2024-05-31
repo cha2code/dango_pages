@@ -20,6 +20,8 @@
     <link rel="stylesheet" type="text/css" href="/dist/css/board.css">
     <!-- JQuery -->
     <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <!-- Item Javascript -->
+    <script type="text/javascript" th:src="@{dist/js/item.js}"></script>
 </head>
 <body>
     <!-- Header Area -->
@@ -29,6 +31,10 @@
         <div class="container-board100">
             <div class="wrap-board100">
                 <form id="itemForm" class="user100-form flex-sb flex-w" enctype="multipart/form-data">
+                    <!-- 카테고리 아이디, 사용자 정보 -->
+                    <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}">
+                    <input type="hidden" id="nickname" name="nickname" th:value="${nickname}">
+
                     <span class="user100-form-title p-b-70 m-t-100">
                         상품 등록
                     </span>
@@ -46,7 +52,7 @@
                     </div>
                     <div class="m-b-40 div-block">
                         <p class="m-b-8 txt-black">
-                            \ 가격
+                            가격
                         </p>
                         <div class="wrap-board-input100">
                             <input class="board-input100" type="text" id="price" name="price"
@@ -65,6 +71,16 @@
                         </div>
                         <!-- 입력 유무 검사 -->
                         <span id="contentsCheckInputBox"></span>
+                    </div>
+                    <div class="m-b-40 div-block">
+                        <p class="m-b-8 txt-black">
+                            이미지 업로드
+                        </p>
+                        <div class="wrap-board-input100">
+                            <input type="file" class="board-file-input100" id="imageFile" name="imageFile">
+                        </div>
+                        <!-- 입력 유무 검사 -->
+                        <span id="imageCheckInputBox"></span>
                     </div>
                     <!-- 상품 등록 버튼 -->
                     <div class="container-board100-form-btn m-t-17 m-b-100">

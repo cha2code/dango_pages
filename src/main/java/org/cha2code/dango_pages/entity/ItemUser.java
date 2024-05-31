@@ -9,6 +9,9 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
+/**
+ * 상품과 사용자 아이디 정보를 가진 테이블과 연동되는 entity class
+ */
 @AllArgsConstructor
 @NoArgsConstructor
 @DynamicInsert
@@ -25,7 +28,7 @@ public class ItemUser extends BaseAuditorEntity {
 
 	@Id
 	@Column(name = "item_id", columnDefinition = "int UNSIGNED not null")
-	private String itemId;
+	private Long itemId;
 
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)

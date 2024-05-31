@@ -48,14 +48,24 @@ create table item_master
     contents             text not null                      comment '상품 내용',
     price                integer not null                   comment '상품 가격',
     create_date          datetime default current_timestamp comment '생성일자',
-    modify_date          datetime                           comment '수정일자'
+    modify_date          datetime                           comment '수정일자',
+    constraint fk_item_master_category_id foreign key (category_id) references category (category_id) on delete cascade
 ) COMMENT '게시판 테이블';
 
 drop table if exists item_user;
 create table item_user
 (
-    user_id              varchar(40) primary key               comment '판매자 ID',
-    item_id              bigint auto_increment                 comment '상품 번호',
-    constraint fk_product_user_user_id foreign key (user_id) references user_master (user_id) on delete cascade,
-    constraint fk_product_user_product_id foreign key (item_id) references item_master (item_id) on delete cascade
+    user_id              varchar(40) primary key            comment '판매자 ID',
+    item_id              bigint not null                    comment '상품 번호',
+    constraint fk_item_user_user_id foreign key (user_id) references user_master (user_id) on delete cascade,
+    constraint fk_item_user_item_id foreign key (item_id) references item_master (item_id) on delete cascade
 ) COMMENT '사용자 게시글 테이블';
+
+drop table if exists category;
+create table category
+(
+    category_id          integer primary key                comment '메뉴 ID',
+    category_name        varchar(20) not null               comment '메뉴 이름',
+    create_date          datetime default current_timestamp comment '생성일자',
+    modify_date          datetime                           comment '수정일자'
+) COMMENT '카테고리 테이블';
