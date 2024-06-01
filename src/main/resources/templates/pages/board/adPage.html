@@ -1,0 +1,47 @@
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <title>dango</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Common Configuration -->
+    <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/dist/css/utils.css">
+    <link rel="stylesheet" href="/dist/css/user.css">
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <!-- Header Area -->
+    <header th:replace="~{common/fragments/header :: header}"></header>
+    <!-- Ad List Area -->
+    <div class="limiter">
+        <div class="container-user100">
+            <div class="wrap-user100">
+                <span class="user100-form-title p-b-51 m-t-100">
+                    명함/전단지/현수막/기타 인쇄물
+                </span>
+                <form th:action="@{/ad}" method="post">
+                    <!-- Update Button -->
+                    <div class="container-user100-form-btn m-t-17 m-b-100">
+                        <div class="col-12 d-flex justify-content-center">
+                            <button type="submit" class="user100-form-btn">
+                                판매하기
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Footer Area -->
+    <footer th:replace="~{common/fragments/footer :: footer}"></footer>
+    <!-- Scroll Top -->
+    <a th:replace="~{common/fragments/scrollTop :: scrollTop}"></a>
+</body>
+</html>

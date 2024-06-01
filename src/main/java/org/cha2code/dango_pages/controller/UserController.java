@@ -27,11 +27,8 @@ public class UserController {
 	 */
 	@GetMapping("/userInfo")
 	public String getUser(Principal principal, Model model) {
-		// session에 저장되어 있는 사용자 ID 저장
-		String userId = principal.getName();
-
 		// 아이디로 사용자의 정보 검색 후 DTO에 저장
-		UserMasterDTO userInfo = userService.getUserInfo(userId);
+		UserMasterDTO userInfo = userService.getUserInfo(principal.getName());
 
 		// view로 사용자 정보 전달
 		model.addAttribute("userInfo", userInfo);
@@ -47,11 +44,8 @@ public class UserController {
 	 */
 	@GetMapping("/updateNickname")
 	public String updateUserNick(Principal principal, Model model) {
-		// session에 저장되어 있는 사용자 ID 저장
-		String userId = principal.getName();
-
 		// 아이디로 사용자의 정보 검색 후 DTO에 저장
-		UserMasterDTO userInfo = userService.getUserInfo(userId);
+		UserMasterDTO userInfo = userService.getUserInfo(principal.getName());
 
 		// view로 사용자 정보 전달
 		model.addAttribute("userInfo", userInfo);
@@ -67,11 +61,8 @@ public class UserController {
 	 */
 	@GetMapping("/updatePassword")
 	public String updateUserPassword(Principal principal, Model model) {
-		// session에 저장되어 있는 사용자 ID 저장
-		String userId = principal.getName();
-
 		// view로 사용자 아이디 전달
-		model.addAttribute("userId", userId);
+		model.addAttribute("userId", principal.getName());
 
 		return "pages/user/update/updatePassword";
 	}
@@ -84,11 +75,8 @@ public class UserController {
 	 */
 	@GetMapping("/updateEmail")
 	public String updateUserEmail(Principal principal, Model model) {
-		// session에 저장되어 있는 사용자 ID 저장
-		String userId = principal.getName();
-
 		// 아이디로 사용자의 정보 검색 후 DTO에 저장
-		UserMasterDTO userInfo = userService.getUserInfo(userId);
+		UserMasterDTO userInfo = userService.getUserInfo(principal.getName());
 
 		// view로 사용자 정보 전달
 		model.addAttribute("userInfo", userInfo);

@@ -1,6 +1,7 @@
 package org.cha2code.dango_pages.controller;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.cha2code.dango_pages.dto.UserMasterDTO;
 import org.cha2code.dango_pages.service.UserService;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
+@Slf4j
 @RequiredArgsConstructor
 @Controller
 public class CommonController {
@@ -35,11 +37,10 @@ public class CommonController {
 	}
 
 	@PostMapping("/ad")
-	public String adPage(@RequestParam Long categoryId, Model model, Principal principal) {
-		String userId = principal.getName();
-		UserMasterDTO userInfo = userService.getUserInfo(userId);
+	public String adPage(Model model, Principal principal) {
+		UserMasterDTO userInfo = userService.getUserInfo(principal.getName());
 
-		model.addAttribute("categoryId", categoryId);
+		model.addAttribute("categoryId", 1);
 		model.addAttribute("nickname", userInfo.nickname());
 
 		return "pages/board/item";
