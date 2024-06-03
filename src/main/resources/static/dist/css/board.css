@@ -109,3 +109,7 @@
 .board100-form-btn:hover {
     background-color: #403866;
 }
+
+.dropdown-toggle::after {
+    display:none;
+}
