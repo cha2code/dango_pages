@@ -14,12 +14,24 @@
 
     <!-- Common Configuration -->
     <th:block th:replace="~{common/fragments/commonConfig :: commonConfig}"></th:block>
+
+    <!-- JQuery -->
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="/dist/css/utils.css">
     <link rel="stylesheet" type="text/css" href="/dist/css/user.css">
     <link rel="stylesheet" type="text/css" href="/dist/css/board.css">
-    <!-- JQuery -->
-    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!-- Summernote -->
+    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.18/lang/summernote-ko-KR.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
     <!-- Item Javascript -->
     <script type="text/javascript" th:src="@{dist/js/item.js}"></script>
 </head>
@@ -30,7 +42,7 @@
     <div class="limiter">
         <div class="container-board100">
             <div class="wrap-board100">
-                <form id="itemForm" class="user100-form flex-sb flex-w" enctype="multipart/form-data">
+                <form id="itemForm" class="user100-form flex-sb flex-w">
                     <!-- 카테고리 아이디, 사용자 정보 -->
                     <input type="hidden" id="categoryId" name="categoryId" th:value="${categoryId}">
                     <input type="hidden" id="nickname" name="nickname" th:value="${nickname}">
@@ -65,22 +77,12 @@
                         <p class="m-b-8 txt-black">
                             상품 설명
                         </p>
-                        <div class="wrap-board-input100">
-                            <textarea class="board-contents-input100" id="contents" name="contents"
+                        <div class="wrap-board-input100 form-group">
+                            <textarea id="summernote" class="form-control" name="contents"
                                    rows="20" placeholder="상품 설명을 입력하세요."></textarea>
                         </div>
                         <!-- 입력 유무 검사 -->
                         <span id="contentsCheckInputBox"></span>
-                    </div>
-                    <div class="m-b-40 div-block">
-                        <p class="m-b-8 txt-black">
-                            이미지 업로드
-                        </p>
-                        <div class="wrap-board-input100">
-                            <input type="file" class="board-file-input100" id="imageFile" name="imageFile">
-                        </div>
-                        <!-- 입력 유무 검사 -->
-                        <span id="imageCheckInputBox"></span>
                     </div>
                     <!-- 상품 등록 버튼 -->
                     <div class="container-board100-form-btn m-t-17 m-b-100">
